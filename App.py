@@ -16,7 +16,7 @@ class MyWindow (QWidget):
     def initUI(self):
         self.setGeometry(0, 0, 600, 600)
         self.setFixedSize(600, 600)
-        self.setWindowTitle('Oder in McDonald')
+        self.setWindowTitle('Order in McDonald')
         grid = QGridLayout()
         self.setLayout(grid)
 
