@@ -1,3 +1,4 @@
+import random
 import sys
 
 from PyQt5.QtCore import Qt, QSize
@@ -51,21 +52,26 @@ class MyWindow (QWidget):
 
         buttons = {}
 
+        values = {}
+
+
+
         for i in range(1, 7):
             for j in range(0, 6):
-                buttons[(i, j)] = QPushButton()
+                buttons[(i,j)] = QPushButton()
                 buttons[(i,j)].resize(100, 100)
                 buttons[(i,j)].setMaximumWidth(100)
                 buttons[(i,j)].setMaximumHeight(100)
                 buttons[(i,j)].setIcon(QIcon('burger.jpg'))
                 buttons[(i,j)].setIconSize(QSize(100, 100))
-                buttons[(i,j)].clicked.connect(self.printAdd)
+                buttons[(i,j)].clicked.connect(self.add)
                 grid.addWidget(buttons[(i,j)], i, j)
+                values[(i,j)] = random.randint(10,35)
 
         self.show()
 
 
-    def printAdd(self):
+    def add(self):
         QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
 
 
