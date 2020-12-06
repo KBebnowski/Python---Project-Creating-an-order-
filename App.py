@@ -16,7 +16,7 @@ class MyWindow (QWidget):
     def initUI(self):
         self.setGeometry(0, 0, 600, 600)
         self.setFixedSize(600, 600)
-        self.setWindowTitle('Aplikacja Qt - Widget')
+        self.setWindowTitle('Oder in McDonald')
         grid = QGridLayout()
         self.setLayout(grid)
 
@@ -25,36 +25,16 @@ class MyWindow (QWidget):
         mylabel.setFont(QFont('Times', 22, QFont.Bold, QFont.StyleItalic))
         grid.addWidget(mylabel, 0,0)
 
-        # btnBurger1 = QPushButton()
-        # btnBurger1.resize(100, 100)
-        # btnBurger1.setMaximumWidth(100)
-        # btnBurger1.setMaximumHeight(100)
-        # btnBurger1.setIcon(QIcon('burger.jpg'))
-        # btnBurger1.setIconSize(QSize(100, 100))
-        # btnBurger1.setIcon
-        #
-        # btnBurger2 = QPushButton()
-        # btnBurger2.resize(100, 100)
-        # btnBurger2.setMaximumWidth(100)
-        # btnBurger2.setMaximumHeight(100)
-        # btnBurger2.setIcon(QIcon('burger.jpg'))
-        # btnBurger2.setIconSize(QSize(100, 100))
-        # btnBurger2.setIcon
-        #
-        # btnBurger3 = QPushButton()
-        # btnBurger3.resize(100, 100)
-        # btnBurger3.setMaximumWidth(100)
-        # btnBurger3.setMaximumHeight(100)
-        # btnBurger3.setIcon(QIcon('burger.jpg'))
-        # btnBurger3.setIconSize(QSize(100, 100))
-        # btnBurger3.setIcon
-
-
         buttons = {}
 
         values = {}
 
+        icons = []
 
+        f = open("icons.txt", "r")
+
+        for line in f.readlines():
+            icons.append(line.rstrip())
 
         for i in range(1, 7):
             for j in range(0, 6):
@@ -62,7 +42,7 @@ class MyWindow (QWidget):
                 buttons[(i,j)].resize(100, 100)
                 buttons[(i,j)].setMaximumWidth(100)
                 buttons[(i,j)].setMaximumHeight(100)
-                buttons[(i,j)].setIcon(QIcon('burger.jpg'))
+                buttons[(i,j)].setIcon(QIcon(icons.pop()))
                 buttons[(i,j)].setIconSize(QSize(100, 100))
                 buttons[(i,j)].clicked.connect(self.add)
                 grid.addWidget(buttons[(i,j)], i, j)
@@ -70,6 +50,7 @@ class MyWindow (QWidget):
 
         self.show()
 
+        f.close()
 
     def add(self):
         QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
