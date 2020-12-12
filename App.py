@@ -56,7 +56,7 @@ class MyWindow (QWidget):
                 self.buttons[(i,j)].setMaximumHeight(100)
                 self.buttons[(i,j)].setIcon(QIcon(self.icons.pop()))
                 self.buttons[(i,j)].setIconSize(QSize(100, 100))
-                self.buttons[(i,j)].clicked.connect(self.add)
+                self.buttons[(i,j)].clicked.connect(self.confirmation)
                 grid.addWidget(self.buttons[(i,j)], i, j)
 
 
@@ -68,7 +68,12 @@ class MyWindow (QWidget):
         QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
         sender = self.sender()
         self.orderCost = self.orderCost + int(sender.text())
-        print(self.orderCost)
+        
+	def confirmation(self, event):
+		choice = QMessageBox.question(self, 'Confirmation', 'Do you want add this product to your order?',
+                                      QMessageBox.Yes | QMessageBox.No)
+		if choice == QMessageBox.Yes:
+			self.add()
 
 
 def main():
