@@ -33,7 +33,7 @@ class MyWindow (QWidget):
         mylabel.setFont(QFont('Times', 22, QFont.Bold, QFont.StyleItalic))
         grid.addWidget(mylabel, 0,0)
 
-		shoppingButton = QPushButton()
+	shoppingButton = QPushButton()
         shoppingButton.resize(50, 50)
         shoppingButton.setMaximumWidth(50)
         shoppingButton.setMaximumHeight(50)
