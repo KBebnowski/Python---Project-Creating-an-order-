@@ -8,10 +8,18 @@ from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QVBoxLayout, QHBoxLay
 
 
 class MyWindow (QWidget):
+
+    values = {}
+
+    buttons = {}
+
+    icons = []
+
+    orderCost = 0
+
     def __init__(self):
         super().__init__()
         self.initUI()
-
 
     def initUI(self):
         self.setGeometry(0, 0, 600, 600)
@@ -25,28 +33,24 @@ class MyWindow (QWidget):
         mylabel.setFont(QFont('Times', 22, QFont.Bold, QFont.StyleItalic))
         grid.addWidget(mylabel, 0,0)
 
-        buttons = {}
-
-        values = {}
-
-        icons = []
-
         f = open("icons.txt", "r")
 
         for line in f.readlines():
-            icons.append(line.rstrip())
+            self.icons.append(line.rstrip())
 
         for i in range(1, 7):
             for j in range(0, 6):
-                buttons[(i,j)] = QPushButton()
-                buttons[(i,j)].resize(100, 100)
-                buttons[(i,j)].setMaximumWidth(100)
-                buttons[(i,j)].setMaximumHeight(100)
-                buttons[(i,j)].setIcon(QIcon(icons.pop()))
-                buttons[(i,j)].setIconSize(QSize(100, 100))
-                buttons[(i,j)].clicked.connect(self.add)
-                grid.addWidget(buttons[(i,j)], i, j)
-                values[(i,j)] = random.randint(10,35)
+                self.values[(i, j)] = random.randint(10, 35)
+                self.buttons[(i,j)] = QPushButton()
+                self.buttons[(i,j)].setText(str(self.values[(i, j)]))
+                self.buttons[(i,j)].resize(100, 100)
+                self.buttons[(i,j)].setMaximumWidth(100)
+                self.buttons[(i,j)].setMaximumHeight(100)
+                self.buttons[(i,j)].setIcon(QIcon(self.icons.pop()))
+                self.buttons[(i,j)].setIconSize(QSize(100, 100))
+                self.buttons[(i,j)].clicked.connect(self.add)
+                grid.addWidget(self.buttons[(i,j)], i, j)
+
 
         self.show()
 
@@ -54,6 +58,9 @@ class MyWindow (QWidget):
 
     def add(self):
         QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
+        sender = self.sender()
+        self.orderCost = self.orderCost + int(sender.text())
+        print(self.orderCost)
 
 
 def main():
