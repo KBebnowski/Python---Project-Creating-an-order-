@@ -15,7 +15,13 @@ class MyWindow (QWidget):
 
     icons = []
 
+    orderedProducts = []
+
     orderCost = 0
+
+    numberOfOrder = 1
+
+    allOrderedProducts = ""
 
     def __init__(self):
         super().__init__()
@@ -39,6 +45,7 @@ class MyWindow (QWidget):
         shoppingButton.setMaximumHeight(50)
         shoppingButton.setIcon(QIcon("shopping.png"))
         shoppingButton.setIconSize(QSize(50, 50))
+        shoppingButton.clicked.connect(self.confirmOrder)
         grid.addWidget(shoppingButton, 0, 5)
 
         iconsFile = open("icons.txt", "r")
@@ -72,8 +79,9 @@ class MyWindow (QWidget):
     def add(self):
         QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
         sender = self.sender()
+        self.orderedProducts.append(sender.text())
         stringOrderCost = sender.text()[-3:]
-        self.orderCost = int(stringOrderCost)
+        self.orderCost = self.orderCost + int(stringOrderCost)
 
     def confirmation(self, event):
         sender = self.sender()
@@ -82,6 +90,25 @@ class MyWindow (QWidget):
                                       QMessageBox.Yes | QMessageBox.No)
         if choice == QMessageBox.Yes:
             self.add()
+
+    def makeOrder(self):
+        orderInfo = "This is number of your order: " + str(self.numberOfOrder) + "\nPrepare money and go to cash."
+        QMessageBox.information(self, "Informacja", orderInfo)
+        self.numberOfOrder = self.numberOfOrder + 1
+        print("Cleaning order...\n\n")
+        self.orderedProducts.clear()
+        self.orderCost = 0
+        print("WELCOME TO McDonald Restaurant. \nPrepare new order")
+
+    def confirmOrder(self, event):
+        self.allOrderedProducts = repr(self.orderedProducts)
+        self.allOrderedProducts = "".join(self.orderedProducts)
+        summary = "You choose this products:\n" + self.allOrderedProducts + "\nCena " + str(self.orderCost)
+        choice = QMessageBox.question(self, 'Summary of your order', summary,
+                                      QMessageBox.Yes | QMessageBox.No)
+        if choice == QMessageBox.Yes:
+            self.makeOrder()
+
 
 def main():
     app = QApplication(sys.argv)
