@@ -1,36 +1,36 @@
 Orange Chai - 14
-Herbata - 06
-Kawa z mlekiem - 09
-Kawa czarna - 08
+Tea - 06
+Coffee with milk - 09
+Black coffee - 08
 Caramel latte macchiato - 12
 Espresso - 05
 Shake - 05
 Cola - 04
-Frytki - 08
-Salatka - 08
+Chips - 08
+Salad - 08
 McNuggets - 14
 Strips - 12
 Chikker - 07
 McDouble - 07
-Kurczakburger - 05
+Chicken burger - 05
 Cheeseburger - 05
 Jalapenoburger - 05
 Hamburger - 04
-Kajzerka - 10
+Kaiser - 10
 McChicken - 12
-Drwal kurczak - 17
-Drwal wolowina - 17
-Kajzerka max - 12
+Chicken Lumberjack's - 17
+Beef Lumberjack's - 17
+Kaiser max - 12
 Big-mac - 14
-Mcroyal podwojny - 16
-McRoyal pikantny - 17
+Mcroyal (double) - 16
+McRoyal spicy - 17
 Mcroyal - 13
-Wiesmac podwojny - 16
-Wiesmac - 13
+McCountry podwojny - 16
+McCountry - 13
 Mcwrap - 06
-Lody smietankowe - 06
+Ice cream - 06
 McFlurry - 07
-Lody malinowe - 07
-Makaronik waniliowy - 06
-Makaronik malinowy - 06
-Ciastko muffin pomarancza-czekolada - 05
+Raspberry ice cream - 07
+Vanilla macaroon - 06
+Raspberry macaroon - 06
+Muffin - 05
