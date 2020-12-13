@@ -41,7 +41,8 @@ class MyWindow (QWidget):
         shoppingButton.setIconSize(QSize(50, 50))
         grid.addWidget(shoppingButton, 0, 5)
 
-        f = open("icons.txt", "r")
+        iconsFile = open("icons.txt", "r")
+        dataFile = open("data.txt", "r")
 
         for line in f.readlines():
             self.icons.append(line.rstrip())
@@ -62,7 +63,8 @@ class MyWindow (QWidget):
 
         self.show()
 
-        f.close()
+        iconsFile.close()
+        dataFile.close()
 
     def add(self):
         QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
