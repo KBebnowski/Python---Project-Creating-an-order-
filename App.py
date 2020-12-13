@@ -3,8 +3,7 @@ import sys
 
 from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QFont, QIcon
-from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QGridLayout, \
-    QMessageBox
+from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QPushButton, QGridLayout, QMessageBox
 
 
 class MyWindow (QWidget):
@@ -78,7 +77,7 @@ class MyWindow (QWidget):
         dataFile.close()
 
     def add(self):
-        QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
+        QMessageBox.information(self, "Information", "Added to order")
         sender = self.sender()
         self.orderedProducts.append(sender.text())
         stringOrderCost = sender.text()[-3:]
@@ -94,17 +93,17 @@ class MyWindow (QWidget):
 
     def makeOrder(self):
         orderInfo = "This is number of your order: " + str(self.numberOfOrder) + "\nPrepare money and go to cash."
-        QMessageBox.information(self, "Informacja", orderInfo)
+        QMessageBox.information(self, "Information", orderInfo)
         self.numberOfOrder = self.numberOfOrder + 1
         print("Cleaning order...\n\n")
         self.orderedProducts.clear()
         self.orderCost = 0
-        print("WELCOME TO McDonald Restaurant. \nPrepare new order")
+        print("WELCOME To McDonald Restaurant. \nPrepare new order")
 
     def confirmOrder(self, event):
         self.allOrderedProducts = repr(self.orderedProducts)
         self.allOrderedProducts = "".join(self.orderedProducts)
-        summary = "You choose this products:\n" + self.allOrderedProducts + "\nCena " + str(self.orderCost)
+        summary = "You choose this products:\n" + self.allOrderedProducts + "\nPrice: " + str(self.orderCost)
         choice = QMessageBox.question(self, 'Summary of your order', summary,
                                       QMessageBox.Yes | QMessageBox.No)
         if choice == QMessageBox.Yes:
