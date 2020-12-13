@@ -33,7 +33,7 @@ class MyWindow (QWidget):
         mylabel.setFont(QFont('Times', 22, QFont.Bold, QFont.StyleItalic))
         grid.addWidget(mylabel, 0,0)
 
-		shoppingButton = QPushButton()
+        shoppingButton = QPushButton()
         shoppingButton.resize(50, 50)
         shoppingButton.setMaximumWidth(50)
         shoppingButton.setMaximumHeight(50)
@@ -44,14 +44,18 @@ class MyWindow (QWidget):
         iconsFile = open("icons.txt", "r")
         dataFile = open("data.txt", "r")
 
-        for line in f.readlines():
+        for line in iconsFile.readlines():
             self.icons.append(line.rstrip())
+
+        font = QFont()
+        font.setPointSize(1)
 
         for i in range(1, 7):
             for j in range(0, 6):
                 self.values[(i, j)] = random.randint(10, 35)
                 self.buttons[(i,j)] = QPushButton()
-                self.buttons[(i,j)].setText(str(self.values[(i, j)]))
+                self.buttons[(i,j)].setText(dataFile.readline())
+                self.buttons[(i,j)].setFont(font)
                 self.buttons[(i,j)].resize(100, 100)
                 self.buttons[(i,j)].setMaximumWidth(100)
                 self.buttons[(i,j)].setMaximumHeight(100)
@@ -59,7 +63,6 @@ class MyWindow (QWidget):
                 self.buttons[(i,j)].setIconSize(QSize(100, 100))
                 self.buttons[(i,j)].clicked.connect(self.confirmation)
                 grid.addWidget(self.buttons[(i,j)], i, j)
-
 
         self.show()
 
@@ -69,14 +72,16 @@ class MyWindow (QWidget):
     def add(self):
         QMessageBox.information(self, "Informacja", "Dodano do zamowienia")
         sender = self.sender()
-        self.orderCost = self.orderCost + int(sender.text())
-        
-	def confirmation(self, event):
-		choice = QMessageBox.question(self, 'Confirmation', 'Do you want add this product to your order?',
-                                      QMessageBox.Yes | QMessageBox.No)
-		if choice == QMessageBox.Yes:
-			self.add()
+        stringOrderCost = sender.text()[-3:]
+        self.orderCost = int(stringOrderCost)
 
+    def confirmation(self, event):
+        sender = self.sender()
+        question = "Do you want add this product to your order?\n" + sender.text()
+        choice = QMessageBox.question(self, 'Confirmation', question,
+                                      QMessageBox.Yes | QMessageBox.No)
+        if choice == QMessageBox.Yes:
+            self.add()
 
 def main():
     app = QApplication(sys.argv)
